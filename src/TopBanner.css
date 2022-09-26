@@ -4,6 +4,7 @@
   width: 100%;
   overflow: hidden;
   padding: 0;
+  padding-top: 12px;
 }
 
 .marquee .scroll {

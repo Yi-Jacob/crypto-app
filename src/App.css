@@ -47,8 +47,24 @@ tbody>tr {
   justify-content: flex-start;
   padding-left: 10%;
   gap: 10px;
+  padding-top: 14px;
+}
+
+td.logo {
+  width: 200px;
+  max-height: 60px;
+}
+
+.overflow-hidden {
+  overflow: hidden;
 }
 
 .symbol {
   text-align: center;
+}
+
+.logo-img {
+  width: 40%;
+  margin: auto;
+  padding-top: 12px;
 }
