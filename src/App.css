@@ -11,6 +11,7 @@
 }
 
 h1 {
+  padding-top: 24px;
   color: forestgreen;
 }
 
@@ -22,7 +23,6 @@ input {
 }
 
 table {
-  width: 1000px;
   border-collapse: separate;
   border-spacing: 0 1em;
 }

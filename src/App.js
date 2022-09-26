@@ -1,6 +1,12 @@
 import "./App.css";
 import Axios from "axios";
 import { useEffect, useState } from "react";
+import SideBanner from "./SideBanner";
+import TopBanner from "./TopBanner";
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+
 
 function App() {
 
@@ -20,59 +26,78 @@ function App() {
   }, []);
 
   return (
-    <div className="App">
-      <h1>All Cryptocurrencies</h1>
-      <input
-        type="text"
-        placeholder="Search..."
-        onChange={(e) => {
-          setSearch(e.target.value);
-        }}
-      />
-      <table>
-        <thead>
-          <tr>
-            <td>Rank</td>
-            <td>Name</td>
-            <td>Symbol</td>
-            <td>Market Cap</td>
-            <td>Price</td>
-            <td>Available Supply</td>
-            {/* <td>Volume(24hrs)</td> */}
-          </tr>
-        </thead>
-        {/* Mapping all the cryptos */}
-        <tbody>
-          {/* Filtering to check for the searched crypto */}
-          {crypto
-            .filter((val) => {
-              return val.name.toLowerCase().includes(search.toLowerCase());
-            })
-            .map((val, id) => {
-              return (
-                <>
-                  <tr id={id}>
-                    <td className="rank">{val.rank}</td>
-                    <td className="logo">
-                      <a href={val.websiteUrl}>
-                        <img src={val.icon} alt="logo" width="30px" />
-                      </a>
+    <Container>
+      <Row>
+        <Col md={12} className="text-center">
+          <TopBanner />
+          <h1>Top 100 Cryptocurrencies</h1>
+          <input
+            type="text"
+            placeholder="Search..."
+            onChange={(e) => {
+              setSearch(e.target.value);
+            }}
+          />
+          </Col>
+        <Col md={9}>
+          <div className="App">
+            {/* <h1>Top 100 Cryptocurrencies</h1>
+            <input
+              type="text"
+              placeholder="Search..."
+              onChange={(e) => {
+                setSearch(e.target.value);
+              }}
+            /> */}
+            <table>
+              <thead>
+                <tr>
+                  <td>Rank</td>
+                  <td>Name</td>
+                  <td>Symbol</td>
+                  <td>Market Cap</td>
+                  <td>Price</td>
+                  {/* <td>Available Supply</td> */}
+                  {/* <td>Volume(24hrs)</td> */}
+                </tr>
+              </thead>
+              {/* Mapping all the cryptos */}
+              <tbody>
+                {/* Filtering to check for the searched crypto */}
+                {crypto
+                  .filter((val) => {
+                    return val.name.toLowerCase().includes(search.toLowerCase());
+                  })
+                  .map((val, id) => {
+                    return (
+                      <>
+                        <tr id={id}>
+                          <td className="rank">{val.rank}</td>
+                          <td className="logo">
+                            <a href={val.websiteUrl}>
+                              <img src={val.icon} alt="logo" width="30px" />
+                            </a>
+                            <p>{val.name}</p>
+                          </td>
+                          <td className="symbol">{val.symbol}</td>
+                          <td>${val.marketCap.toLocaleString()}</td>
+                          <td>${val.price.toFixed(2)}</td>
+                          {/* <td>{val.availableSupply.toLocaleString()}</td> */}
+                          {/* <td>{val.volume.toFixed(0)}</td> */}
+                        </tr>
+                      </>
+                    );
+                  })}
+              </tbody>
+            </table>
+          </div>
+        </Col>
+        <Col md={3}>
+         <SideBanner />
+        </Col>
+      </Row>
+    </Container>
 
-                      <p>{val.name}</p>
-
-                    </td>
-                    <td className="symbol">{val.symbol}</td>
-                    <td>${val.marketCap.toLocaleString()}</td>
-                    <td>${val.price.toFixed(2)}</td>
-                    <td>{val.availableSupply.toLocaleString()}</td>
-                    {/* <td>{val.volume.toFixed(0)}</td> */}
-                  </tr>
-                </>
-              );
-            })}
-        </tbody>
-      </table>
-    </div>
   );
 }
 
