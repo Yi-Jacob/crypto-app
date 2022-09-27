@@ -10,6 +10,14 @@
   background-image: linear-gradient(to top, #dfe9f3 0%, white 100%);
 }
 
+.green {
+  color: green;
+}
+
+.red {
+  color: red;
+}
+
 h1 {
   padding-top: 24px;
   color: forestgreen;
@@ -23,8 +31,8 @@ input {
 }
 
 table {
-  border-collapse: separate;
-  border-spacing: 0 1em;
+  width: 80%;
+  margin: auto;
 }
 
 thead {
@@ -34,7 +42,11 @@ thead {
 }
 
 tbody>tr {
-  text-align: right;
+  text-align: center;
+}
+
+.table-border {
+  border: 1px solid black;
 }
 
 .rank {
@@ -64,7 +76,7 @@ td.logo {
 }
 
 .logo-img {
-  width: 40%;
+  width: 40% !important;
   margin: auto;
   padding-top: 12px;
 }

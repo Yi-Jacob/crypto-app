@@ -24,6 +24,7 @@ function TopBanner() {
     <section class="marquee">
       <div class="scroll">
         <div>
+          <h3 class="category">Top 10</h3>
           {crypto.slice(0,15).map((val, id) => {
             return (
               <h3 class="category">{val.symbol}: ${val.price.toFixed(2)}</h3>
@@ -32,6 +33,7 @@ function TopBanner() {
           )}
         </div>
         <div>
+          <h3 class="category">Top 10</h3>
           {crypto.slice(0, 15).map((val, id) => {
             return (
               <h3 class="category">{val.symbol}: ${val.price.toFixed(2)}</h3>

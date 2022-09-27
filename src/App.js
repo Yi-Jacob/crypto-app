@@ -22,7 +22,9 @@ function App() {
     Axios.get(
       `https://api.coinstats.app/public/v1/coins?skip=0&limit=100¤cy=INR`
     ).then((res) => {
+      console.log(res)
       setCrypto(res.data.coins);
+
     });
   }, []);
 
@@ -45,8 +47,6 @@ function App() {
             />
             <Row>
 
-
-
             {crypto
               .filter((val) => {
                 return val.name.toLowerCase().includes(search.toLowerCase());
@@ -54,64 +54,38 @@ function App() {
               .map((val, id) => {
                 return (
                   <>
-                    <Col md={4}>
+                    <Col md={6} lg={6}>
                       <Card style={{ margin: '12px auto' }}>
                         <Card.Img className="logo-img" width="30px" variant="top" src={val.icon} />
                         <Card.Body>
                           <Card.Title className="text-center">{val.name}</Card.Title>
                           <Card.Text className="text-center">Rank: {val.rank} || Ticker: {val.symbol}</Card.Text>
                           <Card.Title className="text-center">${val.price.toFixed(2)}</Card.Title>
+                          <Card.Text className="text-left">Market Cap: ${val.marketCap.toLocaleString(undefined, {minimumFractionDigits:2, maximumFractionDigits: 2 })}</Card.Text>
+                          <Card.Text className="text-left">Available Supply: {val.availableSupply.toLocaleString()}</Card.Text>
+                          <Card.Text className="text-left">24hr Volume: ${val.volume?.toLocaleString(undefined, { maximumFractionDigits: 2 })}</Card.Text>
+                          <table>
+                            <tr className="table-border">
+                              <td className="table-border">1hr</td>
+                              <td className="table-border">24hr</td>
+                              <td className="table-border">7 day</td>
+                            </tr>
+                            <tr className="table-border">
+                              <td className={val.priceChange1h >= 0 ? 'table-border green' : 'table-border red'}>{val.priceChange1h}</td>
+                              <td className={val.priceChange1h >= 0 ? 'table-border green' : 'table-border red'}>{val.priceChange1d}</td>
+                              <td className={val.priceChange1h >= 0 ? 'table-border green' : 'table-border red'}>{val.priceChange1w}</td>
+                            </tr>
+                          </table>
                         </Card.Body>
+                          <Card.Footer className="text-muted">
+                            <Card.Link href={val.websiteUrl}>Learn More</Card.Link>
+                          </Card.Footer>
                       </Card>
                     </Col>
                   </>
                 );
               })}
-
                 </Row>
-
-
-            <table>
-              <thead>
-                <tr>
-                  <td>Rank</td>
-                  <td>Name</td>
-                  <td>Symbol</td>
-                  <td>Market Cap</td>
-                  <td>Price</td>
-                  {/* <td>Available Supply</td> */}
-                  {/* <td>Volume(24hrs)</td> */}
-                </tr>
-              </thead>
-              {/* Mapping all the cryptos */}
-              <tbody>
-                {/* Filtering to check for the searched crypto */}
-                {crypto
-                  .filter((val) => {
-                    return val.name.toLowerCase().includes(search.toLowerCase());
-                  })
-                  .map((val, id) => {
-                    return (
-                      <>
-                        <tr id={id}>
-                          <td className="rank">{val.rank}</td>
-                          <td className="logo">
-                            <a href={val.websiteUrl}>
-                              <img src={val.icon} alt="logo" width="30px" />
-                            </a>
-                            <p className="overflow-hidden">{val.name}</p>
-                          </td>
-                          <td className="symbol">{val.symbol}</td>
-                          <td>${val.marketCap.toLocaleString()}</td>
-                          <td>${val.price.toFixed(2)}</td>
-                          {/* <td>{val.availableSupply.toLocaleString()}</td> */}
-                          {/* <td>{val.volume.toFixed(0)}</td> */}
-                        </tr>
-                      </>
-                    );
-                  })}
-              </tbody>
-            </table>
           </div>
         </Col>
         <Col md={3}>
